@@ -1,21 +1,16 @@
-import React, { useState } from 'react'
-import {Link} from 'react-router-dom'
+import React, { useContext } from 'react'
+import {Link} from "react-router-dom"
+import chatContext from '../context/ChatContext'
 import './Join.css'
 
 const Join = () => {
-  const [name, setName] = useState('')
-  const [room, setRoom] = useState('')
+  const {login, setLogin} = useContext(chatContext)
 
   return (
-    <div className='joinOuterContainer'>
-      <div className='joinInnerContainer'>
-        <h1 className='heading'>Join</h1>
-        <div><input placeholder='Name' className='joinInput' type='text' onChange={(e)=>setName(e.target.value)} /></div>
-        <div><input placeholder='Room' className='joinInput mt-20' type='text' onChange={(e)=>setRoom(e.target.value)} /></div>
-        <Link onClick={(e)=> (!name || !room ? e.preventDefault() : null)} to={`/chat?name=${name}&room=${room}`}>
-          <button className='button mt-20'>Sign In</button>
-        </Link>
-      </div>
+    <div>
+      <input placeholder='Name' type="text" value={login.name} onChange={(e)=> setLogin(prev=> ({...prev, name:e.target.value}))}/>
+      <input placeholder='Room' type="text" value={login.room} onChange={(e)=> setLogin(prev=> ({...prev, room:e.target.value}))}/>
+      <Link to="/chat"><button>Start</button></Link>
     </div>
   )
 }
