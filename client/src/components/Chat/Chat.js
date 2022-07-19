@@ -56,25 +56,28 @@ const Chat = () => {
   
   return (
     <div className='chatContainer'>
-      <h2 className='roomhead'>Room name</h2>
+      <h2 className='roomhead'>{room}</h2>
       <div className='chatScreen'>
         {
           chats[0]&&chats.map((chat, i)=>{
-            return <p key={chat.text+i}>{`${chat.name === name? "You":chat.name}: ${chat.text}`}</p>
+            return <div key={chat.text+i} style={{textAlign:chat.name===name?"end":"start", margin:"3rem"}}>
+                    <div>{chat.name===name?"You":chat.name}</div>
+                    <div className={`${chat.name===name? "msg-contnet-self bg-green":"msg-contnet-user bg-purple"}`} style={{textAlign:"center"}}><span className='msg-span'>{chat.text}</span></div>
+                  </div>
           })
         }
-        <div>
-          username
-          <div className='msg-contnet'><span className='msg-span'>hi</span></div>
-        </div>
+        
        
       </div>
+      <div className='chatInputDiv'>
         <input 
-          
+          id='chatInput'
           onChange={(e)=>setChat(e.target.value)} type="text"
           onKeyPress={(e)=> e.key === "Enter"?sendChat():null}
           value={chat}
         />
+        <button id='send-btn' onClick={sendChat}>Send</button>
+      </div>
       <div>
         {
           users.map(user=> <li key={user.id}>{user.name}</li>)
