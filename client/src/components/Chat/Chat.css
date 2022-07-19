@@ -1,0 +1,34 @@
+.chatContainer{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    border: 2px solid red;
+    align-items: center;
+    height: 100vh;
+}
+
+.roomhead{
+    width: 30%;
+    height: 3rem;
+    margin-bottom: 0;
+    text-align: center;
+    color: white;
+    background-color: rgb(38, 156, 38);
+    padding: 1rem 1rem 0 1rem;
+
+}
+
+.chatScreen{
+    height: 70%;
+    width: 30%;
+    background-color: white;
+    padding: 1rem 1rem;
+}
+
+.msg-contnet{
+    background-color: rgb(121, 121, 250);
+    width: 60%;
+    padding: 0.7rem;
+    text-align: start;
+    border-radius: 3px 10px 10px 10px;
+}

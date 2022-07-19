@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useRef } from 'react'
 import io from 'socket.io-client'
 import chatContext from '../context/ChatContext';
+import './Chat.css'
 
 let socket;
 const ENDPOINT = 'http://localhost:5000'
@@ -54,23 +55,29 @@ const Chat = () => {
   }
   
   return (
-    <div>
+    <div className='chatContainer'>
+      <h2 className='roomhead'>Room name</h2>
+      <div className='chatScreen'>
+        {
+          chats[0]&&chats.map((chat, i)=>{
+            return <p key={chat.text+i}>{`${chat.name === name? "You":chat.name}: ${chat.text}`}</p>
+          })
+        }
+        <div>
+          username
+          <div className='msg-contnet'><span className='msg-span'>hi</span></div>
+        </div>
+       
+      </div>
+        <input 
+          
+          onChange={(e)=>setChat(e.target.value)} type="text"
+          onKeyPress={(e)=> e.key === "Enter"?sendChat():null}
+          value={chat}
+        />
       <div>
         {
           users.map(user=> <li key={user.id}>{user.name}</li>)
-        }
-      </div>
-      <input 
-      onChange={(e)=>setChat(e.target.value)} type="text"
-      onKeyPress={(e)=> e.key === "Enter"?sendChat():null}
-      value={chat}
-      />
-
-      <div>
-        {
-          chats[0]&&chats.map((chat, i)=>{
-            return <li key={chat.text+i}>{`${chat.name === name? "You":chat.name}: ${chat.text}`}</li>
-          })
         }
       </div>
     </div>

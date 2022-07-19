@@ -1,0 +1,44 @@
+
+.outerInputContainer{
+    height: 90vh;
+    width: 99%;
+    /* position: relative; */
+    display: flex;
+    justify-content: center;
+}
+
+.inputContainer{
+    display: flex;
+    background-color: #7e5b3c;
+    box-shadow: 3px 6px 6px #9e9e9edb;
+    border-radius: 5px;
+    padding: 3rem;
+    width: 18rem;
+    height: 80%;
+    align-self: center;
+    justify-content: center;
+    flex-direction: column;
+    /* position:absolute; */
+    align-items: center;
+    gap: 10px;
+}
+
+#name, #room{
+    height: 2rem;
+    width: 18rem;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    padding: 4px;
+    padding-left: 15px;
+    font-weight: bold;
+}
+
+.join-btn{
+    height: 2rem;
+    width: 6rem;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: large;
+    font-weight: bolder;
+    cursor: pointer;
+}
