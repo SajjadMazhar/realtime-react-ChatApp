@@ -24,8 +24,9 @@ io.on('connection', (socket)=>{
     socket.on('join', ({name, room})=>{
         // const {error, user} = addUser({id:socket.id, name, room})
         socket.join(room)
-        const users = addUser({id:socket.id, name, room})
-        io.to(room).emit("user-join", users)
+        addUser({id:socket.id, name, room})
+        const roomUsers = getUsersInRoom(room)
+        io.to(room).emit("user-join", roomUsers)
     })
     
     socket.on("msg", ({text, name, room}, callback)=>{

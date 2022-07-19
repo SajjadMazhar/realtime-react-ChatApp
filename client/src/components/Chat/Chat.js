@@ -25,9 +25,10 @@ const Chat = () => {
       }
     }
 
-  },[ENDPOINT, login.name, login.room])
+  },[ name, room, setUsers])
 
   useEffect(()=>{
+    
     if(effect2.current === false){
       socket.on("received", ({text, name})=>{
         setChats(prev => [...prev, {text, name}])
@@ -43,7 +44,7 @@ const Chat = () => {
         effect2.current = true
       }
     }
-  },[])
+  })
 
   const sendChat = ()=>{
     if(chat){
