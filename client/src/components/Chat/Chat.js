@@ -16,9 +16,9 @@ const Chat = () => {
     if(effect1.current === false){
       console.log(name, room)
       socket.emit('join', {name, room})
-      socket.on("user-join", (newUser)=>{
-        console.log(newUser)
-        setUsers(prev=> [...prev, newUser])
+      socket.on("user-join", (newUsers)=>{
+        // console.log(newUser)
+        setUsers(newUsers)
       })
       return ()=>{
         effect1.current = true
@@ -32,13 +32,11 @@ const Chat = () => {
       socket.on("received", ({text, name})=>{
         setChats(prev => [...prev, {text, name}])
       })
-      // socket.on("disconnect", (info)=>{
-      //   console.log(info)
-      // })
-      socket.on("left", (updatedUsers)=>{
+    
+      socket.on("left", ({users})=>{
         console.log("client left")
-        setUsers(updatedUsers)
-        console.log(updatedUsers)
+        setUsers(users)
+        console.log(users)
         socket.off()
       })
       return ()=>{
@@ -56,6 +54,11 @@ const Chat = () => {
   
   return (
     <div>
+      <div>
+        {
+          users.map(user=> <li key={user.id}>{user.name}</li>)
+        }
+      </div>
       <input 
       onChange={(e)=>setChat(e.target.value)} type="text"
       onKeyPress={(e)=> e.key === "Enter"?sendChat():null}

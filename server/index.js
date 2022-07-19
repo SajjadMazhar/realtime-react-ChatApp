@@ -24,16 +24,23 @@ io.on('connection', (socket)=>{
     socket.on('join', ({name, room})=>{
         // const {error, user} = addUser({id:socket.id, name, room})
         socket.join(room)
+        const users = addUser({id:socket.id, name, room})
+        io.to(room).emit("user-join", users)
     })
     
     socket.on("msg", ({text, name, room}, callback)=>{
-        console.log({text, name, room})
+        // console.log({text, name, room})
         socket.broadcast.to(room).emit("received", {text, name})
         callback()
     })
 
-    
-
+   socket.on("disconnect", ()=>{
+        // console.log("socket disconnect", {id:socket.id})
+        const user = removeUser(socket.id)
+        if(user){
+            io.to(user.room).emit("left", {users:getUsersInRoom(user.room)})
+        }
+   })
 })
 
 

@@ -10,14 +10,15 @@ const addUser = ({id, name, room})=>{
     }
     const user = {id, name, room}
     users.push(user)
-    return {user}
+    console.log(users)
+    return users
 
 }
 
 const removeUser = (id)=>{
     const index = users.findIndex(user=>user.id===id)
     if(index !==-1){
-        return users.splice(index, 1)
+        return users.splice(index, 1)[0]
     }
 }
 
@@ -26,7 +27,11 @@ const getUser = (id)=>{
 }
 
 const getUsersInRoom = (room)=>{
-    return users.filter(user=> user.room===room)
+    
+    return users.filter(user=> {
+        console.log(users, room)
+        return user.room===room
+    })
 }
 
 module.exports = {
