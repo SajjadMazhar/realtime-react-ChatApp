@@ -10,7 +10,7 @@ const addUser = ({id, name, room})=>{
     }
     const user = {id, name, room}
     users.push(user)
-    console.log(users)
+    // console.log(users)
     return users
 
 }
@@ -29,7 +29,7 @@ const getUser = (id)=>{
 const getUsersInRoom = (room)=>{
     
     return users.filter(user=> {
-        console.log(users, room)
+        // console.log(users, room)
         return user.room===room
     })
 }

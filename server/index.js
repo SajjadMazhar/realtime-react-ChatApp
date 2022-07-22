@@ -35,6 +35,10 @@ io.on('connection', (socket)=>{
         callback()
     })
 
+    socket.on("typing", ({name, room})=>{
+        socket.broadcast.to(room).emit("is-typing", {name, typed:true})
+    })
+
    socket.on("disconnect", ()=>{
         // console.log("socket disconnect", {id:socket.id})
         const user = removeUser(socket.id)
